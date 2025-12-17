@@ -1,0 +1,28 @@
+name: ci_cd
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: set-up python
+        uses: actions/setup-python@v5
+
+      - name: cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip         
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirments.txt')}}
+
+
+      - name: install dependencies
+        run: pip install -r requirments.txt
+
+      - name: run tests
+        run: pytest
