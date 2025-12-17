@@ -35,6 +35,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker Image
-        run: |
-          docker build -t ci_cd_demo .
+        run:  docker build -t . ci_cd_demo 
+         
          
